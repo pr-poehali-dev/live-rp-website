@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, Download, MessageSquare, Server, Github } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Download, MessageSquare, Server, Github, LogIn, UserPlus } from "lucide-react";
 import { Button } from "./ui/button";
 
 const GameNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -21,22 +22,22 @@ const GameNavbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/" className={`${location.pathname === '/' ? 'text-white' : 'text-gray-300'} hover:text-white transition-colors`}>
               Главная
             </Link>
-            <Link to="/download" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/download" className={`${location.pathname === '/download' ? 'text-white' : 'text-gray-300'} hover:text-white transition-colors`}>
               <div className="flex items-center">
                 <Download className="h-4 w-4 mr-1" />
                 Скачать
               </div>
             </Link>
-            <Link to="/servers" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/servers" className={`${location.pathname === '/servers' ? 'text-white' : 'text-gray-300'} hover:text-white transition-colors`}>
               <div className="flex items-center">
                 <Server className="h-4 w-4 mr-1" />
                 Серверы
               </div>
             </Link>
-            <Link to="/forum" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/forum" className={`${location.pathname === '/forum' ? 'text-white' : 'text-gray-300'} hover:text-white transition-colors`}>
               <div className="flex items-center">
                 <MessageSquare className="h-4 w-4 mr-1" />
                 Форум
@@ -53,9 +54,18 @@ const GameNavbar = () => {
             >
               <Github className="h-5 w-5" />
             </a>
-            <Button className="bg-game-accent hover:bg-game-secondary">
-              Войти
-            </Button>
+            <Link to="/register">
+              <Button variant="outline" className="border-game-accent/30 hover:bg-game-accent/10">
+                <UserPlus className="h-4 w-4 mr-2" />
+                Регистрация
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button className="bg-game-accent hover:bg-game-secondary">
+                <LogIn className="h-4 w-4 mr-2" />
+                Войти
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -76,14 +86,14 @@ const GameNavbar = () => {
             <nav className="flex flex-col gap-4">
               <Link
                 to="/"
-                className="text-gray-300 hover:text-white py-2 transition-colors"
+                className={`${location.pathname === '/' ? 'text-white' : 'text-gray-300'} hover:text-white py-2 transition-colors`}
                 onClick={toggleMenu}
               >
                 Главная
               </Link>
               <Link
                 to="/download"
-                className="text-gray-300 hover:text-white py-2 transition-colors"
+                className={`${location.pathname === '/download' ? 'text-white' : 'text-gray-300'} hover:text-white py-2 transition-colors`}
                 onClick={toggleMenu}
               >
                 <div className="flex items-center">
@@ -93,7 +103,7 @@ const GameNavbar = () => {
               </Link>
               <Link
                 to="/servers"
-                className="text-gray-300 hover:text-white py-2 transition-colors"
+                className={`${location.pathname === '/servers' ? 'text-white' : 'text-gray-300'} hover:text-white py-2 transition-colors`}
                 onClick={toggleMenu}
               >
                 <div className="flex items-center">
@@ -103,7 +113,7 @@ const GameNavbar = () => {
               </Link>
               <Link
                 to="/forum"
-                className="text-gray-300 hover:text-white py-2 transition-colors"
+                className={`${location.pathname === '/forum' ? 'text-white' : 'text-gray-300'} hover:text-white py-2 transition-colors`}
                 onClick={toggleMenu}
               >
                 <div className="flex items-center">
@@ -111,7 +121,7 @@ const GameNavbar = () => {
                   Форум
                 </div>
               </Link>
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-border/40">
+              <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border/40">
                 <a
                   href="https://github.com"
                   target="_blank"
@@ -120,9 +130,26 @@ const GameNavbar = () => {
                 >
                   <Github className="h-5 w-5" />
                 </a>
-                <Button className="bg-game-accent hover:bg-game-secondary">
-                  Войти
-                </Button>
+                <Link
+                  to="/register"
+                  className="w-full"
+                  onClick={toggleMenu}
+                >
+                  <Button variant="outline" className="w-full border-game-accent/30 hover:bg-game-accent/10">
+                    <UserPlus className="h-4 w-4 mr-2" />
+                    Регистрация
+                  </Button>
+                </Link>
+                <Link
+                  to="/login"
+                  className="w-full"
+                  onClick={toggleMenu}
+                >
+                  <Button className="w-full bg-game-accent hover:bg-game-secondary">
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Войти
+                  </Button>
+                </Link>
               </div>
             </nav>
           </div>
