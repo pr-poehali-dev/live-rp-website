@@ -5,7 +5,7 @@ import MobileDownload from "@/components/MobileDownload";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { Download, Desktop, Smartphone, ServerCrash } from "lucide-react";
+import { Download, Monitor, Smartphone, ServerCrash } from "lucide-react";
 
 const DownloadPage = () => {
   const { toast } = useToast();
@@ -35,7 +35,7 @@ const DownloadPage = () => {
           <Tabs defaultValue="pc" className="max-w-5xl mx-auto">
             <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
               <TabsTrigger value="pc" className="text-lg py-3">
-                <Desktop className="mr-2 h-5 w-5" />
+                <Monitor className="mr-2 h-5 w-5" />
                 ПК
               </TabsTrigger>
               <TabsTrigger value="mobile" className="text-lg py-3">
