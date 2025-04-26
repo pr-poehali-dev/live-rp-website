@@ -1,92 +1,133 @@
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, X, Download, MessageSquare, Server, Github } from "lucide-react";
 import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { Download, Users } from "lucide-react";
 
 const GameNavbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <header className="bg-game fixed w-full z-50 border-b border-border/50 backdrop-blur-sm bg-background/80">
-      <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold bg-gradient-to-r from-game-accent to-game-secondary bg-clip-text text-transparent">
-              LIVE RP
-            </span>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          <Link to="/" className="flex items-center">
+            <img src="/logo-b.svg" alt="LIVE RP" className="h-8 w-auto mr-2" />
+            <span className="text-xl font-bold bg-gradient-to-r from-game-accent to-game-light bg-clip-text text-transparent">LIVE RP</span>
           </Link>
-          
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <Link to="/" className="nav-link px-4 py-2">
-                  Главная
-                </Link>
-              </NavigationMenuItem>
-              
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="nav-link">
-                  Об игре
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/features"
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          )}
-                        >
-                          <div className="text-sm font-medium leading-none">Особенности</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            Узнайте обо всех ключевых особенностях нашей ролевой игры
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/world"
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          )}
-                        >
-                          <div className="text-sm font-medium leading-none">Мир игры</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            Исследуйте огромный открытый мир Live RP
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
 
-              <NavigationMenuItem>
-                <Link to="/news" className="nav-link px-4 py-2">
-                  Новости
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+              Главная
+            </Link>
+            <Link to="/download" className="text-gray-300 hover:text-white transition-colors">
+              <div className="flex items-center">
+                <Download className="h-4 w-4 mr-1" />
+                Скачать
+              </div>
+            </Link>
+            <Link to="/servers" className="text-gray-300 hover:text-white transition-colors">
+              <div className="flex items-center">
+                <Server className="h-4 w-4 mr-1" />
+                Серверы
+              </div>
+            </Link>
+            <Link to="/forum" className="text-gray-300 hover:text-white transition-colors">
+              <div className="flex items-center">
+                <MessageSquare className="h-4 w-4 mr-1" />
+                Форум
+              </div>
+            </Link>
+          </nav>
 
-        <div className="flex items-center gap-4">
-          <Link to="/forum">
-            <Button variant="outline" className="gap-2">
-              <Users size={16} />
-              Форум
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <Button className="bg-game-accent hover:bg-game-secondary">
+              Войти
             </Button>
-          </Link>
-          <Link to="/download">
-            <Button className="gap-2 bg-game-accent hover:bg-game-secondary">
-              <Download size={16} />
-              Скачать
-            </Button>
-          </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-gray-300 hover:text-white"
+            aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-background border-b border-border/40">
+          <div className="container mx-auto px-4 py-4">
+            <nav className="flex flex-col gap-4">
+              <Link
+                to="/"
+                className="text-gray-300 hover:text-white py-2 transition-colors"
+                onClick={toggleMenu}
+              >
+                Главная
+              </Link>
+              <Link
+                to="/download"
+                className="text-gray-300 hover:text-white py-2 transition-colors"
+                onClick={toggleMenu}
+              >
+                <div className="flex items-center">
+                  <Download className="h-4 w-4 mr-2" />
+                  Скачать
+                </div>
+              </Link>
+              <Link
+                to="/servers"
+                className="text-gray-300 hover:text-white py-2 transition-colors"
+                onClick={toggleMenu}
+              >
+                <div className="flex items-center">
+                  <Server className="h-4 w-4 mr-2" />
+                  Серверы
+                </div>
+              </Link>
+              <Link
+                to="/forum"
+                className="text-gray-300 hover:text-white py-2 transition-colors"
+                onClick={toggleMenu}
+              >
+                <div className="flex items-center">
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  Форум
+                </div>
+              </Link>
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-border/40">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  <Github className="h-5 w-5" />
+                </a>
+                <Button className="bg-game-accent hover:bg-game-secondary">
+                  Войти
+                </Button>
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

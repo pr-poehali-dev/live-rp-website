@@ -1,4 +1,4 @@
-import { Download, Monitor, Globe, Calendar } from "lucide-react";
+import { Download, Monitor, Globe, Calendar, Smartphone, Apple } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 
@@ -98,6 +98,75 @@ const DownloadSection = () => {
             <CardFooter>
               <Button variant="outline" className="w-full border-game-accent text-white hover:bg-game-accent/20">
                 Полный список изменений
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+
+        <div className="mt-10 text-center">
+          <h3 className="text-2xl font-bold mb-6 text-white">Мобильные платформы</h3>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 mt-4">
+          <Card className="game-card">
+            <CardHeader>
+              <Smartphone className="h-10 w-10 mb-2 text-game-accent" />
+              <CardTitle>Android</CardTitle>
+              <CardDescription>Версия 1.1.8</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li className="flex items-center">
+                  <span className="mr-2 text-game-accent">✓</span> 
+                  Оптимизация под различные устройства
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2 text-game-accent">✓</span> 
+                  Поддержка контроллеров
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2 text-game-accent">✓</span> 
+                  Кросс-платформенная синхронизация
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter className="flex flex-col space-y-2">
+              <Button className="w-full gap-2 bg-game-accent hover:bg-game-secondary">
+                <Download className="h-4 w-4" />
+                Скачать APK
+              </Button>
+              <Button variant="outline" className="w-full border-game-accent text-white hover:bg-game-accent/20">
+                Google Play
+              </Button>
+            </CardFooter>
+          </Card>
+
+          <Card className="game-card">
+            <CardHeader>
+              <Apple className="h-10 w-10 mb-2 text-game-accent" />
+              <CardTitle>iOS</CardTitle>
+              <CardDescription>Версия 1.1.8</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li className="flex items-center">
+                  <span className="mr-2 text-game-accent">✓</span> 
+                  Оптимизация для iPhone и iPad
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2 text-game-accent">✓</span> 
+                  Поддержка Apple Game Center
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2 text-game-accent">✓</span> 
+                  Кросс-платформенная синхронизация
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full gap-2 bg-game-accent hover:bg-game-secondary">
+                <Download className="h-4 w-4" />
+                App Store
               </Button>
             </CardFooter>
           </Card>
